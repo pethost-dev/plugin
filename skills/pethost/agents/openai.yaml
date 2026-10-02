@@ -1,6 +1,6 @@
 interface:
   display_name: "Pethost"
-  short_description: "Deploy to your own hosting"
+  short_description: "Deploy and host your projects"
   icon_small: "./assets/mark.svg"
   icon_large: "./assets/icon.png"
   brand_color: "#B79CF5"
