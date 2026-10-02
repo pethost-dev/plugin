@@ -1,0 +1,12 @@
+{
+  "name": "pethost",
+  "description": "The Pethost plugin: deploy and run your projects on your own hosting.",
+  "owner": { "name": "Pethost" },
+  "plugins": [
+    {
+      "name": "pethost",
+      "source": "./",
+      "description": "Deploy and run your projects on Pethost, your own hosting: a skill that says when and how, and the Pethost MCP server."
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "pethost": {
+      "type": "http",
+      "url": "https://mcp.pethost.dev/mcp"
+    }
+  }
+}

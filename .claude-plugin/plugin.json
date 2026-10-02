@@ -1,0 +1,8 @@
+{
+  "name": "pethost",
+  "description": "Deploy and run your projects on Pethost, your own hosting: a skill that says when and how, and the Pethost MCP server.",
+  "author": { "name": "Pethost" },
+  "homepage": "https://console.pethost.dev",
+  "repository": "https://github.com/pethost-dev/plugin",
+  "keywords": ["pethost", "hosting", "deploy", "docker-compose", "mcp"]
+}
