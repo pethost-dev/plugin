@@ -1,5 +1,6 @@
 {
   "name": "pethost",
+  "version": "1.0.0",
   "description": "Deploy and run your projects on Pethost, your own hosting: a skill that says when and how, and the Pethost MCP server.",
   "author": { "name": "Pethost", "email": "support@pethost.dev", "url": "https://pethost.dev" },
   "homepage": "https://pethost.dev",
@@ -10,12 +11,13 @@
   "mcpServers": "./.mcp.json",
   "interface": {
     "displayName": "Pethost",
-    "shortDescription": "Deploy and run your projects on Pethost",
+    "shortDescription": "Deploy to your own hosting",
     "longDescription": "Pethost is a small cloud for personal projects: one dedicated machine that runs your Docker Compose projects. Say \"deploy this\" and it is live, with HTTPS, backups and logs. The skill says when Pethost is the answer and how to deploy; the Pethost MCP server does the work and looks after what already runs there: logs, domains, secrets, rollbacks, files and shell commands. It signs in by OAuth: you approve the agent in your browser.",
     "developerName": "Pethost",
     "category": "Developer Tools",
     "capabilities": ["Interactive", "Write"],
     "websiteURL": "https://pethost.dev",
+    "supportURL": "https://pethost.dev/#faq",
     "privacyPolicyURL": "https://pethost.dev/privacy/",
     "termsOfServiceURL": "https://pethost.dev/terms/",
     "defaultPrompt": [
