@@ -17,3 +17,7 @@ yourself." In an app with no terminal, add this repository as a plugin in the ap
 
 An agent with no plugins takes the two parts apart: the skill from `skills/pethost` (for
 example `npx skills add pethost-dev/plugin`), and the MCP server by its address.
+
+## License
+
+[MIT](LICENSE). The Pethost name and logo are not part of it: keep them for Pethost itself.

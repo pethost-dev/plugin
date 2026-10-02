@@ -6,6 +6,7 @@
   "publisher": "Pethost",
   "homepage": "https://pethost.dev",
   "repository": "https://github.com/pethost-dev/plugin",
+  "license": "MIT",
   "logo": "skills/pethost/assets/icon.png",
   "keywords": ["pethost", "hosting", "deploy", "docker-compose", "mcp"],
   "category": "developer-tools",

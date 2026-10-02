@@ -4,6 +4,7 @@
   "author": { "name": "Pethost", "email": "support@pethost.dev", "url": "https://pethost.dev" },
   "homepage": "https://pethost.dev",
   "repository": "https://github.com/pethost-dev/plugin",
+  "license": "MIT",
   "keywords": ["pethost", "hosting", "deploy", "docker-compose", "mcp"],
   "skills": "./skills/",
   "mcpServers": "./.mcp.json",
