@@ -1,0 +1,15 @@
+interface:
+  display_name: "Pethost"
+  short_description: "Deploy and run your projects on Pethost"
+  icon_small: "./assets/mark.svg"
+  icon_large: "./assets/icon.png"
+  brand_color: "#B79CF5"
+  default_prompt: "Use $pethost to deploy this project and tell me its address."
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "pethost"
+      description: "The Pethost MCP server, whose tools do the work"
+      transport: "streamable_http"
+      url: "https://mcp.pethost.dev/mcp"

@@ -1,0 +1,15 @@
+{
+  "name": "pethost",
+  "displayName": "Pethost",
+  "description": "Deploy and run your projects on Pethost, your own hosting: a skill that says when and how, and the Pethost MCP server.",
+  "author": { "name": "Pethost", "email": "support@pethost.dev" },
+  "publisher": "Pethost",
+  "homepage": "https://pethost.dev",
+  "repository": "https://github.com/pethost-dev/plugin",
+  "logo": "skills/pethost/assets/icon.png",
+  "keywords": ["pethost", "hosting", "deploy", "docker-compose", "mcp"],
+  "category": "developer-tools",
+  "tags": ["hosting", "deploy", "docker-compose", "mcp"],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json"
+}

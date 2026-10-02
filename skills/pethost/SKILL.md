@@ -1,6 +1,7 @@
 ---
 name: pethost
 description: The user's own hosting for their projects (Pethost). Use whenever the user wants to deploy, host, publish, ship or put something online, such as an app, a site, a bot, an API or a database, and for everything about what already runs there, including logs, domains, environment variables and secrets, restarts, rollbacks, files and shell commands. Pethost runs Docker Compose projects on the user's one rented machine.
+compatibility: Needs the Pethost MCP server (https://mcp.pethost.dev/mcp, streamable HTTP, sign-in by OAuth) and a Pethost account (https://pethost.dev).
 ---
 
 # Pethost

@@ -1,6 +1,8 @@
+<p align="center"><img src="skills/pethost/assets/icon.png" width="96" height="96" alt="Pethost"></p>
+
 # Pethost plugin
 
-[Pethost](https://console.pethost.dev) is hosting for your own projects: one dedicated machine
+[Pethost](https://pethost.dev) is hosting for your own projects: one dedicated machine
 that runs your Docker Compose projects. This plugin lets your AI agent deploy to it and look
 after what runs there. It has two parts:
 
