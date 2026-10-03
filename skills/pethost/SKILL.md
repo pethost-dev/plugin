@@ -10,9 +10,10 @@ compatibility: Needs the Pethost MCP server (https://mcp.pethost.dev/mcp, stream
 Pethost is the user's hosting for their own projects: their account rents one dedicated Linux
 machine, and each project on it is a Docker Compose project, a directory with `compose.yaml`,
 deployed as a whole. The machine builds or pulls the images, serves the project's hosts over HTTPS,
-on free names Pethost gives or on the person's own domains, and keeps data in named volumes. You
-run it with the tools of the `pethost` MCP server (`GetMachine`, `CreateProject`, `DeployProject`
-and the rest); the person sees the same in a web panel at https://console.pethost.dev.
+on names under the account's own domain or on the person's own domains, and keeps data in named
+volumes. You run it with the tools of the `pethost` MCP server (`GetMachine`, `CreateProject`,
+`DeployProject` and the rest); the person sees the same in a web panel at
+https://console.pethost.dev.
 
 ## Before anything
 
@@ -48,10 +49,11 @@ and the rest); the person sees the same in a web panel at https://console.pethos
        - { host: recipes.example.com, service: web, port: 3000 }
    ```
 
-   `host` is one of two kinds. A free name under `GetMachine`'s `machine.apps_domain`, such as
-   `recipes.<apps_domain>` (one label of a-z, 0-9 and hyphens), needs nothing from the person:
-   it is their account's from this deploy on, and its DNS record and certificate come within a
-   minute. Use one unless the person wants their own domain. Or a domain or subdomain the person
+   `host` is one of two kinds. A name under `GetMachine`'s `machine.apps_domain`, the account's
+   own domain (such as `sam.pethost.app`): `recipes.<apps_domain>` (one label of a-z, 0-9 and
+   hyphens), as many as you like, or `apps_domain` itself. It needs nothing from the person and
+   is live with HTTPS as the deploy ends (seconds later just after the person set the domain). Use one unless the person wants their own domain. Only
+   the person changes `apps_domain`, in the panel's Settings. Or a domain or subdomain the person
    owns: ask them which, and to make one DNS record for it where the domain's DNS is kept: for a
    subdomain a CNAME to `machine.hostname`; for the bare domain (`example.com`), where DNS allows
    no CNAME, an ALIAS to the same name (some DNS hosts call it ANAME or CNAME flattening). If
@@ -72,9 +74,10 @@ and the rest); the person sees the same in a web panel at https://console.pethos
    `operation.status` is `OPERATION_STATUS_IN_PROGRESS`. If it `FAILED`, `failure_message` and the
    log say why. The project exists: fix it with `DeployProject` (`base_deploy_id`, `/.env` below).
 6. Tell the person the URL (`GetProject`: `project.url`), and the DNS record if it is still to
-   make. A name under `machine.apps_domain` is live once `project.url` starts with `https://`:
-   ask again after a few seconds if it does not yet. A host with `unavailable_message` (the name
-   is somebody else's, or reserved) answers nobody: pick another name.
+   make. A name under `machine.apps_domain` is live once `project.url` starts with `https://`,
+   at once but just after the person set the domain: ask again after a few seconds if not yet. A host with `unavailable_message` answers nobody: a `pethost.app` name outside
+   `machine.apps_domain` (another account's, or a former domain the person changed: redeploy the
+   routes with the new one), or two labels deep. Use one label under `apps_domain`.
 
 **From GitHub, instead of 3 and 4**: `CreateProject` with `{"project_id":"recipes","source":
 {"github":{"repository":"owner/name"}}}`; every push to its branch then deploys by itself. The
