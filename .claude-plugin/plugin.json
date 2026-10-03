@@ -1,7 +1,7 @@
 {
   "name": "pethost",
   "displayName": "Pethost",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Deploy and run your projects on Pethost, your own hosting: a skill that says when and how, and the Pethost MCP server.",
   "author": { "name": "Pethost", "email": "support@pethost.dev", "url": "https://pethost.dev" },
   "homepage": "https://pethost.dev",
