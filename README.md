@@ -49,6 +49,7 @@ A session that is already open sees the plugin after a restart (in Claude Code,
 | “Roll back to yesterday's version.” | Puts an earlier deploy or commit back in one step. |
 | “Back it up before I change the schema.” | Makes a backup it can restore. |
 | “Put it on example.com.” | Adds the address and tells you the one DNS record to make. |
+| “Put a password on it.” | Puts a password page in front of the whole site. |
 | “Set SMTP_HOST and restart.” | Changes the project's environment and deploys it. |
 
 ## What is in the plugin
@@ -95,7 +96,8 @@ agent or from a web panel: both show the same projects, logs and requests.
 - **A machine of your own:** nobody else's projects on it. No cold starts, nothing sleeps.
   Security updates install themselves.
 - **HTTPS addresses:** anything.yourname.pethost.app at once, or your own domain with one DNS
-  record. Certificates renew themselves.
+  record. Certificates renew themselves. A password page in front of the whole site: one
+  sentence to your agent.
 - **Deploys from GitHub:** every push deploys itself, and an earlier commit is one step back.
 - **Request logs:** every request with its status and time, the busiest paths and the error
   rate, kept for 30 days.
