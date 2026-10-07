@@ -56,8 +56,6 @@ A session that is already open sees the plugin after a restart (in Claude Code,
 
 - **A skill**, [`skills/pethost`](skills/pethost/SKILL.md): tells the agent when Pethost is the
   answer, how to deploy and how to look after what runs there.
-- **A setup skill**, [`skills/setup`](skills/setup/SKILL.md): run once after installing, it
-  checks the sign-in and the machine, says what runs there and offers the first deploy.
 - **The Pethost MCP server**, `https://mcp.pethost.dev/mcp`, whose tools do the work. Each does
   one clear thing, and every error says what to do next. Answers are short: logs come filtered
   and paged, and one call waits for a deploy. That is less time and fewer tokens.
