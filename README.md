@@ -56,6 +56,8 @@ A session that is already open sees the plugin after a restart (in Claude Code,
 
 - **A skill**, [`skills/pethost`](skills/pethost/SKILL.md): tells the agent when Pethost is the
   answer, how to deploy and how to look after what runs there.
+- **A setup skill**, [`skills/setup`](skills/setup/SKILL.md): run once after installing, it
+  checks the sign-in and the machine, says what runs there and offers the first deploy.
 - **The Pethost MCP server**, `https://mcp.pethost.dev/mcp`, whose tools do the work. Each does
   one clear thing, and every error says what to do next. Answers are short: logs come filtered
   and paged, and one call waits for a deploy. That is less time and fewer tokens.
@@ -79,6 +81,25 @@ A session that is already open sees the plugin after a restart (in Claude Code,
 | `CreateTransfer` | Uploads or downloads a file, straight between you and the machine. |
 
 Every method and its errors are in the [API reference](https://pethost.dev/docs/api/).
+
+Three more tools read nothing: they show Pethost in an app that has views (see below). `Show`
+is the agent's; the other two are the app's own, for its Project tab and for `@`.
+
+### Views in the conversation
+
+In an app that shows them (the ChatGPT desktop app, where Codex lives, and other hosts of the
+open MCP Apps standard), Pethost is also something to look at:
+
+- **A deploy is a live card**: its log while it builds, then the address, the services and a
+  “Roll back” button.
+- **“Show me the traffic.”** The agent puts the machine, a project, its requests or its logs in
+  the conversation, with the filters for you to change.
+- **An app in the sidebar**: the machine and every project, their requests, logs, deploys,
+  backups and addresses. It reads; what changes anything is a message to your agent, which you
+  see before it is sent.
+- **A Project tab** beside a conversation, and **@** in a message to name one of your projects.
+
+Elsewhere the same tools answer in text, and `Show` answers with a link to the panel.
 
 ### What the agent can and cannot do
 
