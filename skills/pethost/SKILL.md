@@ -114,7 +114,7 @@ write one yourself.
 ## Rules that bite
 
 - A compose file runs as written or is refused: Pethost corrects nothing in it, and each
-  violation says what to write. Refused: `container_name`, a writable bind mount (`./data:/data`: use a named volume;
+  violation says what to write. Refused: a writable bind mount (`./data:/data`: use a named volume;
   project files: add `:ro`), a volume with no name, an `env_file` you did not send,
   `privileged`, `cap_add`, `devices`, host networking and other host namespaces, the Docker
   socket, more than one replica, remote `include`, `extends` or build contexts.
