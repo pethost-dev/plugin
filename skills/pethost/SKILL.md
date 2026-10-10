@@ -57,6 +57,11 @@ write one yourself.
      it unless the person names a domain they own (see "A domain" below).
    - `port`: the port the app listens on, at `0.0.0.0`, not `127.0.0.1`.
    - A routed service needs no `ports:`. A database, a worker or a bot needs no route.
+   - A compose file that already has `ports:`, such as an app's own from its repository, deploys
+     as it is: never edit them out. A published port that answers HTTP gets
+     `<project>.<machine.apps_domain>` by itself (`project.url`; `<project>-<service>.…` each
+     when there are several) and is not opened on the machine; any other opens there as written.
+     Send no `x_pethost.routes` then: with them the machine names nothing.
    - Data lives only in named volumes: whatever else a container writes is lost at the next
      deploy. Secrets live in `/.env`, never in `compose.yaml` or the image.
 2. Send it, one of three ways:
@@ -109,8 +114,7 @@ write one yourself.
 ## Rules that bite
 
 - A compose file runs as written or is refused: Pethost corrects nothing in it, and each
-  violation says what to write. Refused: `container_name`, a published port that a route serves
-  or the machine keeps (22, 80, 443), a writable bind mount (`./data:/data`: use a named volume;
+  violation says what to write. Refused: `container_name`, a writable bind mount (`./data:/data`: use a named volume;
   project files: add `:ro`), a volume with no name, an `env_file` you did not send,
   `privileged`, `cap_add`, `devices`, host networking and other host namespaces, the Docker
   socket, more than one replica, remote `include`, `extends` or build contexts.
