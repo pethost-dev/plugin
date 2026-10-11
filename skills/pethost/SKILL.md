@@ -114,10 +114,14 @@ write one yourself.
 ## Rules that bite
 
 - A compose file runs as written or is refused: Pethost corrects nothing in it, and each
-  violation says what to write. Refused: a writable bind mount (`./data:/data`: use a named volume;
-  project files: add `:ro`), a volume with no name, an `env_file` you did not send,
-  `privileged`, `cap_add`, `devices`, host networking and other host namespaces, the Docker
-  socket, more than one replica, remote `include`, `extends` or build contexts.
+  violation says what to write. Refused: a writable bind mount of the whole project (`.:/app`:
+  add `:ro`), a volume with no name, an `env_file` you did not send, `privileged`, `cap_add`,
+  `devices`, host networking and other host namespaces, the Docker socket, more than one
+  replica, remote `include`, `extends` or build contexts.
+- A folder mounted without `:ro` (`./data:/data`) is not the folder you sent: the container gets
+  the project's volume named after the path (`data`), which deploys keep and which has none of
+  the version's files. So project files take `:ro`, and data is plainer in a named volume. A
+  file mounted without `:ro` is read-only.
 - `compose.yaml` is interpolated as a whole: write `$$` for a `$`.
 - Backups exist only while `machine.backups_enabled` is true. Never promise one otherwise.
 - A project keeps its `/.env` and its routes, name and password (`x-pethost`) across versions,
