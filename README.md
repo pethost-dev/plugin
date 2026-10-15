@@ -7,7 +7,7 @@ your agent. This plugin connects the agent you already use (Claude Code, Codex, 
 Gemini CLI or any other with skills and MCP) to your Pethost machine. Say “deploy this” and it
 is live, with HTTPS, backups and logs.
 
-- **Made for AI agents.** A skill and an MCP server with 13 tools. The agent deploys, reads
+- **Made for AI agents.** A skill and an MCP server with 14 tools. The agent deploys, reads
   logs and requests, rolls back and restores, in plain words from you.
 - **One flat price.** €9.99 a month rents a machine of your own. No fee per project, no
   usage-based pricing, no surprise bill.
@@ -60,7 +60,7 @@ A session that is already open sees the plugin after a restart (in Claude Code,
   one clear thing, and every error says what to do next. Answers are short: logs come filtered
   and paged, and one call waits for a deploy. That is less time and fewer tokens.
 
-### The MCP server's 13 tools
+### The MCP server's 14 tools
 
 | Tool | What it does |
 |---|---|
@@ -71,6 +71,7 @@ A session that is already open sees the plugin after a restart (in Claude Code,
 | `ListCommits` | A GitHub project's commits, to deploy or roll back to. |
 | `GetOperation` | Waits for a deploy, a backup or a restore, and returns its log. |
 | `RunProjectAction` | Start, stop, restart, back up, restore or delete a project. |
+| `SetProjectAlerts` | What Pethost watches on a project, and when it tells you: down, errors, slow. |
 | `RunMachineAction` | SSH keys, open sessions and a restart of the machine. |
 | `QueryHttpTraffic` | The requests: which paths fail and which are slow. |
 | `QueryContainerLogs` | The containers' logs, filtered and paged. |
