@@ -129,9 +129,9 @@ agent or from a web panel: both show the same projects, logs and requests.
   it, never through our panel.
 
 **Pricing.** Starter is €9.99 a month for 2 vCPU, 3 GB of memory and 30 GB of SSD. Grow is
-€17.99 for 4 vCPU, 6 GB and 60 GB. Prices are without VAT. As many projects, containers and
-databases as fit: nothing is metered, and nothing is billed on top. There is no free tier.
-[See the plans](https://pethost.dev/#pricing).
+€17.99 for 4 vCPU, 6 GB and 60 GB. Scale is €59 for 8 vCPU, 30 GB and 200 GB. Prices are without
+VAT. As many projects, containers and databases as fit: nothing is metered, and nothing is billed
+on top. There is no free tier. [See the plans](https://pethost.dev/#pricing).
 
 **Who it is for.** Solo developers and early startups who host several projects, bots or small
 apps and want one fixed monthly bill, and people who build with an AI agent and want it to
