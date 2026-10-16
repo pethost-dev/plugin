@@ -156,7 +156,5 @@ write one yourself.
   (streamable HTTP, sign-in by OAuth): add it in your client's own way, tell the person what
   loads it (a restart or a reload), and start its sign-in, which the person approves in their
   browser. Never ask for a password or a token.
-- **No machine** (`FAILED_PRECONDITION` with a `NoMachine` detail): only the person can get
-  one. Give them the sentence and the link the error has, and stop until they say it is done.
 - **Not signed in** (`UNAUTHENTICATED`): sign in to the MCP server again; the person approves in
   their browser.
