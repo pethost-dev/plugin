@@ -7,7 +7,7 @@ your agent. This plugin connects the agent you already use (Claude Code, Codex, 
 Gemini CLI or any other with skills and MCP) to your Pethost machine. Say “deploy this” and it
 is live, with HTTPS, backups and logs.
 
-- **Made for AI agents.** A skill and an MCP server with 14 tools. The agent deploys, reads
+- **Made for AI agents.** A skill and an MCP server with 15 tools. The agent deploys, reads
   logs and requests, rolls back and restores, in plain words from you.
 - **One flat price.** €9.99 a month rents a machine of your own. No fee per project, no
   usage-based pricing, no surprise bill.
@@ -60,13 +60,14 @@ A session that is already open sees the plugin after a restart (in Claude Code,
   one clear thing, and every error says what to do next. Answers are short: logs come filtered
   and paged, and one call waits for a deploy. That is less time and fewer tokens.
 
-### The MCP server's 14 tools
+### The MCP server's 15 tools
 
 | Tool | What it does |
 |---|---|
 | `GetMachine` | The machine and every project on it: resources, addresses, problems. |
 | `GetProject` | One project in full: services, addresses, certificates, deploys, backups, traffic. |
 | `CreateProject` | Creates a project from a directory, files or a GitHub repository, and deploys it. |
+| `LinkDatabase` | Lets an app project reach a database at its host. |
 | `DeployProject` | Deploys a new version: code, environment variables, a domain, a commit or a rollback. |
 | `ListCommits` | A GitHub project's commits, to deploy or roll back to. |
 | `GetOperation` | Waits for a deploy, a backup or a restore, and returns its log. |
@@ -124,7 +125,8 @@ agent or from a web panel: both show the same projects, logs and requests.
 - **Nightly backups:** encrypted, stored off the machine, kept for 14 days.
 - **SSH and SFTP** into any container, and a terminal in the panel.
 - **Docker Compose, as written:** a project is a Compose file, and the same file runs anywhere
-  else Docker does. A database is one more service in it, at no extra cost.
+  else Docker does. A database is one click, Postgres or Valkey, with a page for connecting
+  your apps, at no extra cost.
 - **In the EU:** your data lives on your machine, and requests to your sites go straight to
   it, never through our panel.
 

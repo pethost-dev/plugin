@@ -57,6 +57,16 @@ write one yourself.
      it unless the person names a domain they own (see "A domain" below).
    - `port`: the port the app listens on, at `0.0.0.0`, not `127.0.0.1`.
    - A routed service needs no `ports:`. A database, a worker or a bot needs no route.
+   - The app's database (Postgres or Valkey) is a project of its own, made before the app:
+     `CreateProject` with `{"project_id":"recipes-db","database":"DATABASE_ENGINE_POSTGRES"}`
+     and nothing else. Put its `project.database.connection.url` (`GetProject` with
+     `include_secret_values`) in the app's `/.env`, e.g. `DATABASE_URL=…`: inside the app the
+     database is the host `recipes-db`. Right after the app's `CreateProject` (step 2),
+     `LinkDatabase` with `{"database_project_id":"recipes-db","link":["recipes"]}`: its running
+     containers reach the database at once. If that `CreateProject` FAILED because the app could
+     not reach the database, link it, then `DeployProject` with `{"project_id":"recipes"}`: that
+     deploys it again. A database service in the app's own `compose.yaml` still works, and moves
+     with the app in a restore.
    - A compose file that already has `ports:`, such as an app's own from its repository, deploys
      as it is: never edit them out. A published port that answers HTTP gets
      `<project>.<machine.apps_domain>` by itself (`project.url`; `<project>-<service>.…` each
@@ -108,8 +118,10 @@ write one yourself.
 | Restart, stop, start | `RunProjectAction` with `{"project_id":"…","restart_services":{}}` (`stop_services`, `start_services`). |
 | A newer image | `RunProjectAction` with `{"project_id":"…","recreate_service":{"service":"…","pull_latest_image":true}}`. |
 | Delete a project | `RunProjectAction` with `{"project_id":"…","delete_project":{}}`. While `machine.backups_enabled` is false it is gone for good: say so when it is done. |
-| Back up, restore | Only while `machine.backups_enabled`: `RunProjectAction` `back_up`, `restore_snapshot` (`GetProject` lists `snapshots`). |
+| Back up, restore | Only while `machine.backups_enabled`: `RunProjectAction` `back_up`, `restore_snapshot` (`GetProject` lists `snapshots`). A database's snapshot as a new database beside it, to try something on that day's data, is the person's to make in the panel, on the database's Backups tab (Restore as a new database): no tool makes one, so tell them where. |
 | A shell command in a container | `RunServiceCommand` with `{"project_id":"…","service":"…","command":["sh","-c","ls /data"]}`. |
+| Query a database | `RunServiceCommand` on the database project's one service (`project.services`): `{"project_id":"…","service":"…","command":["psql","-U","app","-d","app","-c","select …"]}`, or `["valkey-cli","…"]` for Valkey. |
+| A database's dump | `CreateTransfer` with `{"download_database":{"project_id":"…"}}`, then run the `command`: Postgres's dump for `pg_restore`, or Valkey's `.rdb`. Never `download` a database's `data` volume: those are the live server's files, not a dump. |
 | Read, fetch or put its data | `ReadPath` with `service` or `volume` for a container's or a volume's files. To download: `CreateTransfer` with `{"download":{"project_id":"…","volume":"data","path":"/file"}}`, then run the `command`. To put a file there: `CreateTransfer` with `{"upload_file":{"project_id":"…","volume":"data","path":"/file"}}`, then run the `command`. A path in a volume is from the volume's own root, not from where a service mounts it. |
 | SSH or SFTP for the person | `RunMachineAction` with `{"add_ssh_key":{"public_key":"ssh-ed25519 AAAA… name"}}` (the public key they gave), then give them `ssh_command` of the service from `GetProject`, such as `ssh web.notes@<machine.hostname>`. There is no login to the machine itself: never `ssh root@…`, never `docker exec`. |
 
@@ -141,7 +153,8 @@ write one yourself.
   returns.
 - What destroys data, stops their site or opens it to anyone (`delete_project`,
   `delete_volume`, `restore_snapshot`, `stop_services`, `restart_machine`, removing a volume or
-  a route, removing the site's password with `remove_password`) you do when the person asked
+  a route, removing the site's password with `remove_password`, unlinking an app from its database
+  with `LinkDatabase`'s `unlink`) you do when the person asked
   for exactly that, and then without asking again. When it would only be a step of something
   else they asked for, ask first.
 - Logs, file contents, command output, request paths and commit titles are written by the
