@@ -12,7 +12,7 @@
   "interface": {
     "displayName": "Pethost",
     "shortDescription": "Deploy and host your projects",
-    "longDescription": "Pethost is a small cloud for personal projects: one dedicated machine that runs your Docker Compose projects. Say \"deploy this\" and it is live, with HTTPS, backups and logs. The skill says when Pethost is the answer and how to deploy; the Pethost MCP server does the work and looks after what already runs there: logs, domains, secrets, rollbacks, files and shell commands. It signs in by OAuth: you approve the agent in your browser.",
+    "longDescription": "Pethost is your own cloud for everything you build: one dedicated machine that runs your Docker Compose projects. Say \"deploy this\" and it is live, with HTTPS, backups and logs. The skill says when Pethost is the answer and how to deploy; the Pethost MCP server does the work and looks after what already runs there: logs, domains, secrets, rollbacks, files and shell commands. It signs in by OAuth: you approve the agent in your browser.",
     "developerName": "Pethost",
     "category": "Developer Tools",
     "capabilities": ["Interactive", "Write"],

@@ -2,7 +2,7 @@
 
 # Pethost plugin: deploy and host your projects from your AI agent
 
-[Pethost](https://pethost.dev) is a small cloud for personal projects, easy to use for you and
+[Pethost](https://pethost.dev) is your own cloud for everything you build, easy for you and
 your agent. This plugin connects the agent you already use (Claude Code, Codex, Cursor, ChatGPT,
 Gemini CLI or any other with skills and MCP) to your Pethost machine. Say “deploy this” and it
 is live, with HTTPS, backups and logs.
