@@ -7,7 +7,7 @@ your agent. This plugin connects the agent you already use (Claude Code, Codex, 
 Gemini CLI or any other with skills and MCP) to your Pethost machine. Say “deploy this” and it
 is live, with HTTPS, backups and logs.
 
-- **Made for AI agents.** A skill and an MCP server with 15 tools. The agent deploys, reads
+- **Made for AI agents.** A skill and an MCP server. The agent deploys, reads
   logs and requests, rolls back and restores, in plain words from you.
 - **One flat price.** €9.99 a month rents a machine of your own. No fee per project, no
   usage-based pricing, no surprise bill.
@@ -60,13 +60,14 @@ A session that is already open sees the plugin after a restart (in Claude Code,
   one clear thing, and every error says what to do next. Answers are short: logs come filtered
   and paged, and one call waits for a deploy. That is less time and fewer tokens.
 
-### The MCP server's 15 tools
+### The MCP server's tools
 
 | Tool | What it does |
 |---|---|
 | `GetMachine` | The machine and every project on it: resources, addresses, problems. |
 | `GetProject` | One project in full: services, addresses, certificates, deploys, backups, traffic. |
 | `CreateProject` | Creates a project from a directory, files or a GitHub repository, and deploys it. |
+| `CreateDatabase` | Creates a Postgres or Valkey database, empty or from a snapshot. |
 | `LinkDatabase` | Lets an app project reach a database at its host. |
 | `DeployProject` | Deploys a new version: code, environment variables, a domain, a commit or a rollback. |
 | `ListCommits` | A GitHub project's commits, to deploy or roll back to. |

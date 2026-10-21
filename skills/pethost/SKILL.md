@@ -58,8 +58,8 @@ write one yourself.
    - `port`: the port the app listens on, at `0.0.0.0`, not `127.0.0.1`.
    - A routed service needs no `ports:`. A database, a worker or a bot needs no route.
    - The app's database (Postgres or Valkey) is a project of its own, made before the app:
-     `CreateProject` with `{"project_id":"recipes-db","database":"DATABASE_ENGINE_POSTGRES"}`
-     and nothing else. Put its `project.database.connection.url` (`GetProject` with
+     `CreateDatabase` with `{"project_id":"recipes-db","engine":"DATABASE_ENGINE_POSTGRES"}`.
+     Put its `project.database.connection.url` (`GetProject` with
      `include_secret_values`) in the app's `/.env`, e.g. `DATABASE_URL=…`: inside the app the
      database is the host `recipes-db`. Right after the app's `CreateProject` (step 2),
      `LinkDatabase` with `{"database_project_id":"recipes-db","link":["recipes"]}`: its running
@@ -118,7 +118,7 @@ write one yourself.
 | Restart, stop, start | `RunProjectAction` with `{"project_id":"…","restart_services":{}}` (`stop_services`, `start_services`). |
 | A newer image | `RunProjectAction` with `{"project_id":"…","recreate_service":{"service":"…","pull_latest_image":true}}`. |
 | Delete a project | `RunProjectAction` with `{"project_id":"…","delete_project":{}}`. While `machine.backups_enabled` is false it is gone for good: say so when it is done. |
-| Back up, restore | Only while `machine.backups_enabled`: `RunProjectAction` `back_up`, `restore_snapshot` (`GetProject` lists `snapshots`). A database's snapshot as a new database beside it, to try something on that day's data, is the person's to make in the panel, on the database's Backups tab (Restore as a new database): no tool makes one, so tell them where. |
+| Back up, restore | Only while `machine.backups_enabled`: `RunProjectAction` `back_up`, `restore_snapshot` (`GetProject` lists `snapshots`). A database's snapshot as a new database beside it, to try something on that day's data: `CreateDatabase` with `{"project_id":"…","engine":"…","from_snapshot_id":"…"}`. |
 | A shell command in a container | `RunServiceCommand` with `{"project_id":"…","service":"…","command":["sh","-c","ls /data"]}`. |
 | Query a database | `RunServiceCommand` on the database project's one service (`project.services`): `{"project_id":"…","service":"…","command":["psql","-U","app","-d","app","-c","select …"]}`, or `["valkey-cli","…"]` for Valkey. |
 | A database's dump | `CreateTransfer` with `{"download_database":{"project_id":"…"}}`, then run the `command`: Postgres's dump for `pg_restore`, or Valkey's `.rdb`. Never `download` a database's `data` volume: those are the live server's files, not a dump. |
