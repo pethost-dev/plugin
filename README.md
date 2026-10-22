@@ -18,7 +18,7 @@ logs.
 **[Get a machine](https://console.pethost.dev/)** · [pethost.dev](https://pethost.dev) ·
 [About Pethost](https://pethost.dev/about/) · [API reference](https://pethost.dev/docs/api/)
 
-![The Pethost panel's first page: the machine's CPU, memory and disk, and six projects as cards, each with its name, its address, its requests of the last day and the state of its services.](https://pethost.dev/shots/projects.webp)
+![The Pethost panel's first page: the machine's CPU, memory and disk, and its projects as cards: apps with their address and requests of the last day, and two databases with the apps that use them.](https://pethost.dev/shots/projects.webp)
 
 ## Deploy from Claude Code, Codex, Cursor or any MCP agent
 
@@ -33,10 +33,10 @@ To install it by hand:
 | Agent | Install |
 |---|---|
 | **Claude Code** | `claude plugin marketplace add pethost-dev/plugin`, then `claude plugin install pethost@pethost` |
-| **Claude apps** (no terminal) | Add this repository as a plugin in the app's settings. |
+| **Claude apps** (no terminal) | [Pethost in Claude's directory](https://claude.ai/directory/plugins/27da2ada-7da5-490d-b118-306edc2ece1d%40anthropic-plugin-directory), or this repository added as a plugin in the app's settings. |
 | **Codex** (CLI and desktop app) | `codex plugin marketplace add pethost-dev/plugin`, then `codex plugin add pethost@pethost` |
 | **Cursor, Gemini CLI and any other agent** | The two parts apart. The skill: `npx skills add pethost-dev/plugin`. The MCP server: `https://mcp.pethost.dev/mcp` (streamable HTTP, sign-in by OAuth), added in the agent's own way. |
-| **ChatGPT** on the web | The MCP server alone, by its address, in developer mode. |
+| **ChatGPT** on the web | [Pethost in ChatGPT's plugin directory](https://chatgpt.com/plugins/plugin_asdk_app_6ac036b9c85c8191b99021c5935ec581), which Codex shows too. Or the MCP server alone, by its address, in developer mode. |
 
 A session that is already open sees the plugin after a restart (in Claude Code,
 `/reload-plugins`).
@@ -84,8 +84,8 @@ A session that is already open sees the plugin after a restart (in Claude Code,
 
 Every method and its errors are in the [API reference](https://pethost.dev/docs/api/).
 
-Three more tools read nothing: they show Pethost in an app that has views (see below). `Show`
-is the agent's; the other two are the app's own, for its Project tab and for `@`.
+Three more tools show Pethost in an app that has views (see below). `Show` is the agent's, and
+reads nothing; the other two are the app's own, for its Project tab and for `@`.
 
 ### Views in the conversation
 
