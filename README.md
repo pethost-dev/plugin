@@ -10,12 +10,12 @@ logs.
 
 - **Made for AI agents.** A skill and an MCP server. The agent deploys, reads
   logs and requests, rolls back and restores, in plain words from you.
-- **One flat price.** €9.99 a month rents a machine of your own. No fee per project, no
-  usage-based pricing, no surprise bill.
+- **One flat price.** €9.99 a month reserves CPU, memory and disk for your projects, so you
+  can experiment freely: no fee per project, no usage-based pricing, no surprise bill.
 - **Anything Docker runs.** Web apps, APIs, bots, workers and their databases, as Docker
   Compose projects. No cold starts: nothing sleeps.
 
-**[Get a machine](https://console.pethost.dev/)** · [pethost.dev](https://pethost.dev) ·
+**[Get started](https://console.pethost.dev/)** · [pethost.dev](https://pethost.dev) ·
 [About Pethost](https://pethost.dev/about/) · [API reference](https://pethost.dev/docs/api/)
 
 ![The Pethost panel's first page: the machine's CPU, memory and disk, and its projects as cards: apps with their address and requests of the last day, and two databases with the apps that use them.](https://pethost.dev/shots/projects.webp)
@@ -111,12 +111,12 @@ browser, and revoke it in the panel's Settings at any time.
 
 ## Docker Compose hosting at one flat price
 
-Pethost is managed hosting for Docker Compose projects. A subscription rents one virtual machine
-that only your account uses. Pethost's software on it deploys your projects, gives them HTTPS
+Pethost is managed hosting for Docker Compose projects. A subscription reserves CPU, memory and
+disk for your projects, at one flat price. Pethost's software deploys them, gives them HTTPS
 addresses, keeps their request logs and backs them up every night. You run it through your
 agent or from a web panel: both show the same projects, logs and requests.
 
-- **A machine of your own:** nobody else's projects on it. No cold starts, nothing sleeps.
+- **Always on:** no cold starts, nothing sleeps, on the resources reserved for your projects.
   Security updates install themselves.
 - **HTTPS addresses:** anything.yourname.pethost.app at once, or your own domain with one DNS
   record. Certificates renew themselves. A password page in front of the whole site: one
@@ -134,26 +134,26 @@ agent or from a web panel: both show the same projects, logs and requests.
 
 **Pricing.** Starter is €9.99 a month for 2 vCPU, 3 GB of memory and 30 GB of SSD. Grow is
 €17.99 for 4 vCPU, 6 GB and 60 GB. Scale is €59 for 8 vCPU, 30 GB and 200 GB. Prices are without
-VAT. As many projects, containers and databases as fit: nothing is metered, and nothing is billed
-on top. There is no free tier. [See the plans](https://pethost.dev/#pricing).
+VAT. Each plan reserves its CPU, memory and disk for your projects, so you can try anything: as
+many projects, containers and databases as fit, nothing metered, and nothing billed on top. There is no free tier. [See the plans](https://pethost.dev/#pricing).
 
 **Who it is for.** Solo developers and early startups who host several projects, bots or small
 apps and want one fixed monthly bill, and people who build with an AI agent and want it to
 deploy and run what it wrote. It is not for large teams whose applications need several regions
-or autoscaling: the machine is the limit.
+or autoscaling: a plan's size is the limit.
 
 ## How Pethost compares
 
 | If you use | The difference |
 |---|---|
-| [Heroku](https://pethost.dev/about/#heroku), [Render](https://pethost.dev/about/#render), [DigitalOcean App Platform](https://pethost.dev/about/#digitalocean) | There each app, worker and database is one more line on the bill. On Pethost one flat price covers the whole machine: as many projects and databases as fit, and nothing sleeps. |
-| [Railway, Fly.io](https://pethost.dev/about/#railway), [Koyeb](https://pethost.dev/about/#koyeb) | There CPU, memory and traffic are metered, so the bill moves with every busy month. On Pethost the machine is the limit: nothing is metered, nothing is billed on top. |
-| [Vercel, Netlify](https://pethost.dev/about/#vercel) | Made for front ends and serverless functions: a bot, a long-running worker or a database is another service with its own price. Pethost runs the front end, the back end and the database on one machine. |
-| [Coolify, Dokploy](https://pethost.dev/about/#coolify), [CapRover, Dokku, Easypanel](https://pethost.dev/about/#caprover) | Self-hosted: the server is yours to rent, update, secure and back up. Pethost is the machine and the panel together, looked after for you, and agents are first-class users, not an add-on. |
+| [Heroku](https://pethost.dev/about/#heroku), [Render](https://pethost.dev/about/#render), [DigitalOcean App Platform](https://pethost.dev/about/#digitalocean) | There each app, worker and database is one more line on the bill. On Pethost one flat price covers everything you run: as many projects and databases as fit, and nothing sleeps. |
+| [Railway, Fly.io](https://pethost.dev/about/#railway), [Koyeb](https://pethost.dev/about/#koyeb) | There CPU, memory and traffic are metered, so the bill moves with every busy month. On Pethost your plan's size is the limit: nothing is metered, nothing is billed on top. |
+| [Vercel, Netlify](https://pethost.dev/about/#vercel) | Made for front ends and serverless functions: a bot, a long-running worker or a database is another service with its own price. Pethost runs the front end, the back end and the database side by side, at one flat price. |
+| [Coolify, Dokploy](https://pethost.dev/about/#coolify), [CapRover, Dokku, Easypanel](https://pethost.dev/about/#caprover) | Self-hosted: the server is yours to rent, update, secure and back up. On Pethost the server and the panel come together, both looked after for you, and agents are first-class users, not an add-on. |
 | [Sliplane](https://pethost.dev/about/#sliplane) | The closest: a flat price per server. There a Compose file is converted into its own services; Pethost runs a Compose project as written. |
 | [Replit](https://pethost.dev/about/#replit) | You build and publish inside Replit, with its own agent. Pethost works with the agent you already use, and one flat price covers all your apps. |
 | [PythonAnywhere](https://pethost.dev/about/#pythonanywhere) | Python only, no Docker. Pethost runs anything Docker runs, in any language. |
-| [A VPS you set up yourself](https://pethost.dev/about/#vps) | The server is the cheap part. You still set up the proxy, DNS, certificates, backups and updates yourself, and fix them when they break. Pethost is the server with all of that done. |
+| [A VPS you set up yourself](https://pethost.dev/about/#vps) | The server is the cheap part. You still set up the proxy, DNS, certificates, backups and updates yourself, and fix them when they break. On Pethost all of that is done. |
 
 [About Pethost](https://pethost.dev/about/) has each comparison in full, with prices.
 
@@ -174,7 +174,7 @@ No. The web panel does the same, and shows the same projects, logs and requests.
 Yes. One DNS record, and the certificate comes by itself.
 
 **Is there a free tier?**
-No: €9.99 rents a real machine, so nothing sleeps. Cancel any time:
+No: €9.99 a month reserves the resources your projects run on, so nothing sleeps. Cancel any time:
 [refunds and cancellation](https://pethost.dev/refunds/) has the rules.
 
 ## License
