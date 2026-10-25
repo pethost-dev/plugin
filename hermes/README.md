@@ -20,33 +20,33 @@ is the answer and how to deploy, and the Pethost MCP server, whose tools do the 
 ## Install
 
 1. [Subscribe](https://console.pethost.dev/), and a machine is set up for you.
-2. In the panel's [Settings](https://console.pethost.dev/settings), under API tokens, create a
-   token and copy it: it is not shown again.
-3. Give it to Hermes and install the package:
+2. Install the package, and connect Hermes to Pethost by OAuth:
 
    ```sh
-   echo 'PETHOST_API_TOKEN=pth_…' >> ~/.hermes/.env
    hermes plugins install pethost-dev/plugin/hermes --enable
+   hermes mcp add pethost --url https://mcp.pethost.dev/mcp --auth oauth
+   hermes config set mcp_servers.pethost.trust untrusted
    ```
 
-4. In a new session, say “Deploy this and send me the link.” Hermes packs the project, writes a
+   Open the link Hermes shows and approve Hermes on Pethost's page: there is no token to copy.
+   The panel's Settings lists the connection under Agents, as “Hermes Agent”, and revokes it.
+3. In a new session, say “Deploy this and send me the link.” Hermes packs the project, writes a
    Dockerfile if there is none, deploys it and answers with its address.
 
-### Or sign in by OAuth
+The package's format has no way to ask for a browser sign-in, so the package's own connection
+sends an API token. The server `hermes mcp add` writes into Hermes's configuration replaces it
+and signs in by OAuth; the skill stays. The last line keeps Hermes asking before every tool that
+changes something, as the package's connection does.
 
-The package's format has no way to ask for a browser sign-in, so the package sends a token.
-Hermes itself signs in to Pethost by OAuth, with no token to copy, when you add the server to
-its own configuration:
+### Or with an API token
+
+Leave out the last two lines, and the package connects with an API token instead. In the
+panel's [Settings](https://console.pethost.dev/settings), under API tokens, create a token and
+copy it: it is not shown again. Then give it to Hermes:
 
 ```sh
-hermes mcp add pethost --url https://mcp.pethost.dev/mcp --auth oauth
+echo 'PETHOST_API_TOKEN=pth_…' >> ~/.hermes/.env
 ```
-
-Open the link Hermes shows and approve Hermes on Pethost's page. That connection replaces the
-package's, which then needs no token; the skill stays. To keep Hermes asking before every tool
-that changes something, as the package does, add `trust: untrusted` under
-`mcp_servers.pethost` in `~/.hermes/config.yaml`. Settings lists the connection under Agents,
-as “Hermes Agent”, and revokes it.
 
 ## What to ask
 
@@ -63,8 +63,8 @@ The tools and what each does are in [the plugin's README](https://github.com/pet
 ## What the package does
 
 - **Network:** it connects Hermes to Pethost's MCP server, `https://mcp.pethost.dev/mcp`, over
-  HTTPS, sending the token from `PETHOST_API_TOKEN`. It runs no process of its own and has no
-  Python.
+  HTTPS, sending the token from `PETHOST_API_TOKEN` (or by OAuth, from the server you added). It
+  runs no process of its own and has no Python.
 - **Approvals:** the server is marked `untrusted`, so Hermes asks before every tool that may
   change something: a deploy, a restart, a restore, a deletion, a command in a container. Tools
   that only read (the machine, projects, logs, requests, files) run without asking.

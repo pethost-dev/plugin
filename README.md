@@ -35,7 +35,7 @@ To install it by hand:
 | **Claude Code** | `claude plugin marketplace add pethost-dev/plugin`, then `claude plugin install pethost@pethost` |
 | **Claude apps** (no terminal) | [Pethost in Claude's directory](https://claude.ai/directory/plugins/27da2ada-7da5-490d-b118-306edc2ece1d%40anthropic-plugin-directory), or this repository added as a plugin in the app's settings. |
 | **Codex** (CLI and desktop app) | `codex plugin marketplace add pethost-dev/plugin`, then `codex plugin add pethost@pethost` |
-| **Hermes Agent** | `hermes plugins install pethost-dev/plugin/hermes --enable`, with an API token from the panel's Settings, or the server by OAuth: [`hermes/`](hermes/README.md) says how. |
+| **Hermes Agent** | `hermes plugins install pethost-dev/plugin/hermes --enable`, then `hermes mcp add pethost --url https://mcp.pethost.dev/mcp --auth oauth` to sign in by OAuth, or an API token from the panel's Settings: [`hermes/`](hermes/README.md) says how. |
 | **Cursor, Gemini CLI and any other agent** | The two parts apart. The skill: `npx skills add pethost-dev/plugin`. The MCP server: `https://mcp.pethost.dev/mcp` (streamable HTTP, sign-in by OAuth), added in the agent's own way. |
 | **ChatGPT** on the web | [Pethost in ChatGPT's plugin directory](https://chatgpt.com/plugins/plugin_asdk_app_6ac036b9c85c8191b99021c5935ec581), which Codex shows too. Or the MCP server alone, by its address, in developer mode. |
 
@@ -108,8 +108,8 @@ Elsewhere the same tools answer in text, and `Show` answers with a link to the p
 
 It can deploy, read logs and requests, change settings, restart, roll back and restore. It
 cannot pay for anything or change your account. It signs in by OAuth: you approve it in your
-browser, and revoke it in the panel's Settings at any time. Hermes's package is the one that
-sends an API token instead, which Settings revokes too.
+browser, and revoke it in the panel's Settings at any time. Hermes's package, on its own, sends
+an API token instead, which Settings revokes too.
 
 ## Docker Compose hosting at one flat price
 
