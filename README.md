@@ -68,7 +68,7 @@ A session that is already open sees the plugin after a restart (in Claude Code,
 |---|---|
 | `GetMachine` | The machine and every project on it: resources, addresses, problems. |
 | `GetProject` | One project in full: services, addresses, certificates, deploys, backups, traffic. |
-| `CreateProject` | Creates a project from a directory, files or a GitHub repository, and deploys it. |
+| `CreateProject` | Creates a project from a directory, files or a GitHub repository, linked to its databases, and deploys it. |
 | `CreateDatabase` | Creates a Postgres or Valkey database, empty or from a snapshot. |
 | `LinkDatabase` | Lets an app project reach a database at its host. |
 | `DeployProject` | Deploys a new version: code, environment variables, a domain, a commit or a rollback. |
