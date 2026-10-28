@@ -57,22 +57,24 @@ write one yourself.
      it unless the person names a domain they own (see "A domain" below).
    - `port`: the port the app listens on, at `0.0.0.0`, not `127.0.0.1`.
    - A routed service needs no `ports:`. A database, a worker or a bot needs no route.
-   - The app's database (Postgres or Valkey) is a project of its own, made before the app:
-     `CreateDatabase` with `{"project_id":"recipes-db","engine":"DATABASE_ENGINE_POSTGRES"}`,
-     then the app's `CreateProject` (step 2) with
+   - The app's database (Postgres, MariaDB or Valkey) is a project of its own, made before the
+     app: `CreateDatabase` with `{"project_id":"recipes-db","engine":"DATABASE_ENGINE_POSTGRES"}`
+     (`DATABASE_ENGINE_MARIADB` for an app that asks for MySQL or MariaDB), then the app's
+     `CreateProject` (step 2) with
      `"link_databases":[{"database_project_id":"recipes-db","env_prefix":"DATABASE"}]` (another
      prefix for a second one, e.g. `REDIS`). The machine writes `DATABASE_URL`, `_HOST`,
      `_PORT`, `_USER`, `_PASSWORD` and `_NAME` into the app's `/.env`, so `compose.yaml` passes
-     `DATABASE_URL: ${DATABASE_URL:?}` to the app and no password is copied. The app reaches the
+     `DATABASE_URL: ${DATABASE_URL:?}` to the app, or the parts it reads, such as
+     `WORDPRESS_DB_HOST: ${DATABASE_HOST:?}`, and no password is copied. The app reaches the
      database at the host `recipes-db` from its first start: its deploy waits for a database
      still being made. If the directory's own `.env` already sets one of those names, as a
      laptop's often sets `DATABASE_URL`, `CreateProject` refuses it: send
      `"files":[{"path":"/.env","text":"…"}]` beside the `upload_id`, that file without them.
-   - Each app gets a Postgres of its own. Apps that belong together may share one: link it with
-     `"own_user":true`, and the app gets a user and a database of its own in it; they are then
-     backed up and restored together. `own_user` is Postgres only: a Valkey has one user, so
-     give each app a Valkey of its own. A database service in the app's own `compose.yaml` still
-     works, and moves with the app in a restore.
+   - Each app gets a database of its own. Apps that belong together may share a Postgres or a
+     MariaDB: link it with `"own_user":true`, and the app gets a user and a database of its own
+     in it; they are then backed up and restored together. `own_user` is for Postgres and
+     MariaDB: a Valkey has one user, so give each app a Valkey of its own. A database service in
+     the app's own `compose.yaml` still works, and moves with the app in a restore.
    - `LinkDatabase` links an app that already exists, as the apps' user (`app`), and writes
      nothing into its `/.env`: put `project.database.connection.url` there yourself (`GetProject`
      of the database with `include_secret_values`), with `DeployProject` `files`. A user of its
@@ -135,12 +137,12 @@ write one yourself.
 | Roll back | `GetProject`: in `project.operations`, the newest deploy with `files_kept` is the version before. `DeployProject` with `{"project_id":"…","rollback_deploy_id":"<its operation_id>"}` puts its files back exactly (the `/.env`, the routes and the volumes' data stay as they are now); never retype an old file by hand. A GitHub project: `ListCommits`, then `DeployProject` with `commit`. The directory on your disk still holds the newer code afterwards: say so, since the next deploy from it brings that code back. |
 | Restart, stop, start | `RunProjectAction` with `{"project_id":"…","restart_services":{}}` (`stop_services`, `start_services`). |
 | A newer image | `RunProjectAction` with `{"project_id":"…","recreate_service":{"service":"…","pull_latest_image":true}}`. |
-| Delete a project | `RunProjectAction` with `{"project_id":"…","delete_project":{}}`. While `machine.backups_enabled` is false it is gone for good: say so when it is done. An app's user and database of its own in a shared Postgres go with it, data and all. The databases it was linked to stay: delete each with its own `delete_project` if the person wants it gone too. |
+| Delete a project | `RunProjectAction` with `{"project_id":"…","delete_project":{}}`. While `machine.backups_enabled` is false it is gone for good: say so when it is done. An app's user and database of its own in a shared Postgres or MariaDB go with it, data and all. The databases it was linked to stay: delete each with its own `delete_project` if the person wants it gone too. |
 | Back up, restore | Only while `machine.backups_enabled`: `RunProjectAction` `back_up`, `restore_snapshot` (`GetProject` lists `snapshots`). A database's snapshot as a new database beside it, to try something on that day's data: `CreateDatabase` with `{"project_id":"…","engine":"…","from_snapshot_id":"…"}`. |
 | A shell command in a container | `RunServiceCommand` with `{"project_id":"…","service":"…","command":["sh","-c","ls /data"]}`. |
-| Query a database | `RunServiceCommand` on the database project's one service (`project.services`): `{"project_id":"…","service":"…","command":["psql","-U","app","-d","app","-c","select …"]}` (the data of an app in `project.database.own_user_projects`: its id in place of both `app`), or `["valkey-cli","…"]` for Valkey. |
+| Query a database | `RunServiceCommand` on the database project's one service (`project.services`): `{"project_id":"…","service":"…","command":["psql","-U","app","-d","app","-c","select …"]}` for Postgres, `["mariadb","app","-e","select …"]` for MariaDB, or `["valkey-cli","…"]` for Valkey. The data of an app in `project.database.own_user_projects`: its id in place of each `app`. |
 | A database's size | `RunProjectAction` with `{"project_id":"…","set_database_size":{"memory_limit_bytes":…}}`, one of `machine.database_engines` sizes. The database restarts: its apps lose their connections for a few seconds. Then `GetMachine`: an app that does not reconnect shows as restarting; restart it (`restart_services`). A Valkey whose data is more than the size keeps (its maxmemory, 70 % of the size) is refused before anything changes, and the refusal gives both figures. A size changes nothing on the bill, since the plan's price is flat: a smaller size only leaves memory to the other projects. |
-| A database's dump | `CreateTransfer` with `{"download_database":{"project_id":"…"}}`, then run the `command`: Postgres's dump for `pg_restore`, or Valkey's `.rdb`. Never `download` a database's `data` volume: those are the live server's files, not a dump. |
+| A database's dump | `CreateTransfer` with `{"download_database":{"project_id":"…"}}`, then run the `command`: Postgres's dump for `pg_restore`, MariaDB's `.sql` for the `mariadb` client, or Valkey's `.rdb`. Never `download` a database's `data` volume: those are the live server's files, not a dump. |
 | Read, fetch or put its data | `ReadPath` with `service` or `volume` for a container's or a volume's files. To download: `CreateTransfer` with `{"download":{"project_id":"…","volume":"data","path":"/file"}}`, then run the `command`. To put a file there: `CreateTransfer` with `{"upload_file":{"project_id":"…","volume":"data","path":"/file"}}`, then run the `command`. A path in a volume is from the volume's own root, not from where a service mounts it. |
 | SSH or SFTP for the person | `RunMachineAction` with `{"add_ssh_key":{"public_key":"ssh-ed25519 AAAA… name"}}` (the public key they gave), then give them `ssh_command` of the service from `GetProject`, such as `ssh web.notes@<machine.hostname>`. There is no login to the machine itself: never `ssh root@…`, never `docker exec`. |
 

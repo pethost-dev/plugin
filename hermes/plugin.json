@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "pethost",
-  "version": "1.8.0",
+  "version": "1.9.0",
   "description": "Deploy and run your projects on Pethost from Hermes Agent: a skill that says when and how, and the Pethost MCP server.",
   "author": { "name": "Pethost", "email": "support@pethost.dev", "url": "https://pethost.dev" },
   "homepage": "https://pethost.dev",

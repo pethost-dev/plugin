@@ -7,8 +7,9 @@ is the answer and how to deploy, and the Pethost MCP server, whose tools do the 
 “deploy this” and it is live, with HTTPS, backups and logs.
 
 - **Anything Docker runs.** Web apps, APIs, bots, workers and their databases, as Docker
-  Compose projects, with [Postgres or Valkey in one click](https://pethost.dev/postgres/) and
-  [over 80 apps](https://pethost.dev/templates/) to install. No cold starts: nothing sleeps.
+  Compose projects, with [Postgres](https://pethost.dev/postgres/), MariaDB or Valkey in one
+  click and [over 80 apps](https://pethost.dev/templates/) to install. No cold starts: nothing
+  sleeps.
 - **One flat price.** €9.99 a month for as many projects as fit, so you can experiment
   freely: no fee per project, no usage-based pricing, no surprise bill.
 - **Everything visible.** Every request for 30 days, live logs, alerts when a site is down or
