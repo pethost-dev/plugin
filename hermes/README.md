@@ -34,20 +34,11 @@ is the answer and how to deploy, and the Pethost MCP server, whose tools do the 
 3. In a new session, say “Deploy this and send me the link.” Hermes packs the project, writes a
    Dockerfile if there is none, deploys it and answers with its address.
 
-The package's format has no way to ask for a browser sign-in, so the package's own connection
-sends an API token. The server `hermes mcp add` writes into Hermes's configuration replaces it
-and signs in by OAuth; the skill stays. The last line keeps Hermes asking before every tool that
-changes something, as the package's connection does.
-
-### Or with an API token
-
-Leave out the last two lines, and the package connects with an API token instead. In the
-panel's [Settings](https://console.pethost.dev/settings), under API tokens, create a token and
-copy it: it is not shown again. Then give it to Hermes:
-
-```sh
-echo 'PETHOST_API_TOKEN=pth_…' >> ~/.hermes/.env
-```
+The package's format has no way to ask for a browser sign-in, so its own connection names only
+Pethost's address, and Pethost answers it that it is not signed in: Hermes has no Pethost tools
+until `hermes mcp add` writes the server into Hermes's configuration, where it signs in by OAuth
+and takes the package's connection's place. The skill stays the package's. The last line keeps
+Hermes asking before every tool that changes something, as the package marks its own connection.
 
 ## What to ask
 
@@ -64,14 +55,15 @@ The tools and what each does are in [the plugin's README](https://github.com/pet
 ## What the package does
 
 - **Network:** it connects Hermes to Pethost's MCP server, `https://mcp.pethost.dev/mcp`, over
-  HTTPS, sending the token from `PETHOST_API_TOKEN` (or by OAuth, from the server you added). It
-  runs no process of its own and has no Python.
-- **Approvals:** the server is marked `untrusted`, so Hermes asks before every tool that may
-  change something: a deploy, a restart, a restore, a deletion, a command in a container. Tools
-  that only read (the machine, projects, logs, requests, files) run without asking.
-- **The skill:** it has Hermes run the upload or download command a transfer returns (`tar`
-  and `curl`, between your computer and your machine on Pethost), and open a deployed site to
-  check that it answers.
-- **The token:** it can deploy to and manage your machine, and cannot change your account or
-  pay for anything. It does not expire: revoke it in Settings when you no longer need it.
-  Without it the server does not connect, and Hermes says that `PETHOST_API_TOKEN` is not set.
+  HTTPS, signed in by OAuth from the server you added: the package holds no key or token and
+  reads none. It runs no process of its own and has no Python.
+- **Approvals:** the package marks its server `untrusted`, and the install's last line marks the
+  one you added so, so Hermes asks before every tool that may change something: a deploy, a
+  restart, a restore, a deletion, a command in a container. Tools that only read (the machine,
+  projects, logs, requests, files) run without asking.
+- **The skill:** to move files it has Hermes run `tar` and `curl` in commands the skill itself
+  writes, only to `https://` at your machine's own name on Pethost (`….pethost.network`), and
+  before an upload it tells you that the folder goes as it is, its `.env` included. It also
+  opens a deployed site to check that it answers.
+- **The sign-in:** it can deploy to and manage your machine, and cannot change your account or
+  pay for anything. The panel's Settings revokes it, under Agents.

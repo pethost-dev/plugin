@@ -3,8 +3,7 @@
   "mcpServers": {
     "pethost": {
       "type": "streamable-http",
-      "url": "https://mcp.pethost.dev/mcp",
-      "headers": { "Authorization": "Bearer ${PETHOST_API_TOKEN}" }
+      "url": "https://mcp.pethost.dev/mcp"
     }
   }
 }
