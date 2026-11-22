@@ -1,0 +1,15 @@
+interface:
+  display_name: "Pethost Agent Sandboxes"
+  short_description: "Run code in Linux microVMs"
+  icon_small: "./assets/mark.svg"
+  icon_large: "./assets/icon.png"
+  brand_color: "#B9A7FF"
+  default_prompt: "Use $pethost-sandboxes to run this script in a sandbox and show me what it prints."
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "pethost-sandboxes"
+      description: "The Pethost Agent Sandboxes MCP server, whose tools do the work"
+      transport: "streamable_http"
+      url: "https://mcp.pethost.dev/sandboxes"

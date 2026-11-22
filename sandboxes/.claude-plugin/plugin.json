@@ -1,0 +1,16 @@
+{
+  "name": "pethost-sandboxes",
+  "displayName": "Pethost Agent Sandboxes",
+  "version": "1.0.0",
+  "description": "Sandboxes for AI agents: Firecracker microVMs that run code, coding agents and a browser. A skill that says when and how, and the Pethost Agent Sandboxes MCP server.",
+  "author": { "name": "Pethost", "email": "support@pethost.dev", "url": "https://pethost.dev" },
+  "homepage": "https://pethost.dev/sandboxes/",
+  "repository": "https://github.com/pethost-dev/plugin",
+  "license": "MIT",
+  "keywords": ["pethost", "sandbox", "microvm", "firecracker", "code-execution", "coding-agents", "mcp"],
+  "icon": "./skills/pethost-sandboxes/assets/icon.png",
+  "documentationUrl": "https://github.com/pethost-dev/plugin#pethost-agent-sandboxes",
+  "supportUrl": "mailto:support@pethost.dev",
+  "privacyPolicyUrl": "https://pethost.dev/privacy/",
+  "termsOfServiceUrl": "https://pethost.dev/terms/"
+}

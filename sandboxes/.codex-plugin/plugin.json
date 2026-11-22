@@ -1,0 +1,33 @@
+{
+  "name": "pethost-sandboxes",
+  "version": "1.0.0",
+  "description": "Sandboxes for AI agents: Firecracker microVMs that run code, coding agents and a browser. A skill that says when and how, and the Pethost Agent Sandboxes MCP server.",
+  "author": { "name": "Pethost", "email": "support@pethost.dev", "url": "https://pethost.dev" },
+  "homepage": "https://pethost.dev/sandboxes/",
+  "repository": "https://github.com/pethost-dev/plugin",
+  "license": "MIT",
+  "keywords": ["pethost", "sandbox", "microvm", "firecracker", "code-execution", "coding-agents", "mcp"],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Pethost Agent Sandboxes",
+    "shortDescription": "Run code in Linux microVMs",
+    "longDescription": "Pethost Agent Sandboxes gives an agent Linux computers of its own: Firecracker microVMs, each with its own kernel, made from a template in about 0.1 s, with Python, Node.js, Docker, Claude Code, Codex, OpenCode and a desktop with Chrome. Run code and tests, give a coding agent its own computer, drive Chrome, fork a sandbox to try two things at once. A sandbox pauses with its memory when idle and wakes at the next call. It signs in by OAuth: you approve the agent in your browser.",
+    "developerName": "Pethost",
+    "category": "Developer Tools",
+    "capabilities": ["Interactive", "Write"],
+    "websiteURL": "https://pethost.dev/sandboxes/",
+    "supportURL": "https://pethost.dev/#faq",
+    "privacyPolicyURL": "https://pethost.dev/privacy/",
+    "termsOfServiceURL": "https://pethost.dev/terms/",
+    "defaultPrompt": [
+      "Run this script in a Pethost sandbox and show me what it prints",
+      "Open this page in Chrome in a sandbox and take a screenshot",
+      "Fork the sandbox and try both fixes"
+    ],
+    "brandColor": "#B9A7FF",
+    "composerIcon": "./skills/pethost-sandboxes/assets/mark.svg",
+    "logo": "./skills/pethost-sandboxes/assets/icon.png",
+    "screenshots": []
+  }
+}

@@ -36,7 +36,7 @@ To install it by hand:
 | **Claude apps** (no terminal) | [Pethost in Claude's directory](https://claude.ai/directory/plugins/27da2ada-7da5-490d-b118-306edc2ece1d%40anthropic-plugin-directory), or this repository added as a plugin in the app's settings. |
 | **Codex** (CLI and desktop app) | `codex plugin marketplace add pethost-dev/plugin`, then `codex plugin add pethost@pethost` |
 | **Hermes Agent** | `hermes plugins install pethost-dev/plugin/hermes --enable`, then `hermes mcp add pethost --url https://mcp.pethost.dev/mcp --auth oauth` to sign in by OAuth: [`hermes/`](hermes/README.md) says how. |
-| **Cursor, Gemini CLI and any other agent** | The two parts apart. The skill: `npx skills add pethost-dev/plugin`. The MCP server: `https://mcp.pethost.dev/mcp` (streamable HTTP, sign-in by OAuth), added in the agent's own way. |
+| **Cursor, Gemini CLI and any other agent** | The two parts apart. The skill: `npx skills add pethost-dev/plugin --skill pethost`. The MCP server: `https://mcp.pethost.dev/mcp` (streamable HTTP, sign-in by OAuth), added in the agent's own way. |
 | **ChatGPT** on the web | [Pethost in ChatGPT's plugin directory](https://chatgpt.com/plugins/plugin_asdk_app_6ac036b9c85c8191b99021c5935ec581), which Codex shows too. Or the MCP server alone, by its address, in developer mode. |
 
 A session that is already open sees the plugin after a restart (in Claude Code,
@@ -109,6 +109,33 @@ Elsewhere the same tools answer in text, and `Show` answers with a link to the p
 It can deploy, read logs and requests, change settings, restart, roll back and restore. It
 cannot pay for anything or change your account. It signs in by OAuth: you approve it in your
 browser, and revoke it in the panel's Settings at any time.
+
+## Pethost Agent Sandboxes
+
+A second plugin here, `pethost-sandboxes`, is for a different job: Linux computers of their own
+for AI agents, to run code. Each sandbox is a Firecracker microVM with its own kernel, made from
+a template in about 0.1 s, with Python, Node.js, Docker, Claude Code, Codex, OpenCode and a
+desktop with Chrome. It pauses with its memory and processes when idle and wakes at the next
+call, stops to object storage when idle longer, and forks. You pay per second while it runs.
+It needs a workspace of [Agent Sandboxes](https://pethost.dev/sandboxes/), and the hosting
+plugin above does not install it: each plugin brings only its own MCP server.
+
+| Agent | Install |
+|---|---|
+| **Claude Code** | `claude plugin marketplace add pethost-dev/plugin`, then `claude plugin install pethost-sandboxes@pethost` |
+| **Codex** (CLI and desktop app) | `codex plugin marketplace add pethost-dev/plugin`, then `codex plugin add pethost-sandboxes@pethost` |
+| **Hermes Agent** | `hermes mcp add pethost-sandboxes --url https://mcp.pethost.dev/sandboxes --auth oauth` |
+| **Cursor, Gemini CLI and any other agent** | The skill: `npx skills add pethost-dev/plugin --skill pethost-sandboxes`. The MCP server: `https://mcp.pethost.dev/sandboxes` (streamable HTTP, sign-in by OAuth). |
+
+| You say | Your agent |
+|---|---|
+| “Run this script in a sandbox.” | Makes a sandbox, writes the files, runs them and shows what they printed. |
+| “Open this page in Chrome and take a screenshot.” | Drives Chrome on the sandbox's desktop and looks at the screen. |
+| “Fork it and try both fixes.” | Copies the sandbox, memory and processes included, and works in each copy. |
+| “Let Codex refactor it in a sandbox.” | Prompts a coding agent inside the sandbox and reports its answer. |
+
+The skill is [`sandboxes/skills/pethost-sandboxes`](sandboxes/skills/pethost-sandboxes/SKILL.md),
+and every method is in the [API reference](https://pethost.dev/docs/sandboxes/api/).
 
 ## Docker Compose hosting at one flat price
 

@@ -1,6 +1,6 @@
 {
   "name": "pethost",
-  "description": "The Pethost plugin: deploy and run your projects on your own hosting.",
+  "description": "The Pethost plugins: deploy and run your projects on your own hosting, and run code in sandboxes for AI agents.",
   "owner": { "name": "Pethost", "email": "support@pethost.dev", "url": "https://pethost.dev" },
   "plugins": [
     {
@@ -9,6 +9,13 @@
       "source": "./",
       "description": "Deploy and run your projects on Pethost, your own hosting: a skill that says when and how, and the Pethost MCP server.",
       "tags": ["hosting", "deploy", "docker-compose", "mcp"]
+    },
+    {
+      "name": "pethost-sandboxes",
+      "displayName": "Pethost Agent Sandboxes",
+      "source": "./sandboxes",
+      "description": "Sandboxes for AI agents: Firecracker microVMs that run code, coding agents and a browser. A skill that says when and how, and the Pethost Agent Sandboxes MCP server.",
+      "tags": ["sandbox", "microvm", "code-execution", "mcp"]
     }
   ]
 }
