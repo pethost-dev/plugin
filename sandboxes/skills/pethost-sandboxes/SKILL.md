@@ -1,6 +1,6 @@
 ---
 name: pethost-sandboxes
-description: Linux sandboxes for AI agents (Pethost Agent Sandboxes, Firecracker microVMs) to run code and tests in isolation, give a coding agent its own computer, drive Chrome on a desktop and fork an environment to try two things at once. Use whenever code should run somewhere other than the user's own computer. Not for hosting an app that stays online for people: that is the pethost skill.
+description: Linux sandboxes for AI agents (Pethost Agent Sandboxes, Firecracker microVMs) to run code and tests in isolation, give a coding agent its own computer, drive Chrome on a desktop and start ready from a template. Use whenever code should run somewhere other than the user's own computer. Not for hosting an app that stays online for people: that is the pethost skill.
 license: MIT
 compatibility: Needs the Pethost Agent Sandboxes MCP server (streamable HTTP, sign-in by OAuth) and a Pethost workspace of sandboxes (https://pethost.dev/sandboxes/).
 ---
@@ -94,8 +94,6 @@ never print it in the conversation or put it in a file.
 - **Chrome**: `ControlDesktop` with `actions` (`click`, `type_text`, `press_keys`, `scroll`,
   `wait_ms`) answers with a screenshot you see. To let the person watch or take over,
   `CreateLink` with `{"desktop":{}}`, a one-time link, or the `panel_url`.
-- **Try two fixes at once**: `ForkSandbox` with `{"count":2}` copies the sandbox, memory and
-  processes included; work in each copy, keep the one that works, delete the other.
 - **Start ready next time**: `CreateTemplate` with `{"sandbox_id":"…","name":"my-app"}` saves its
   disk; `CreateSandbox` with `{"template":"my-app"}` starts from it.
 

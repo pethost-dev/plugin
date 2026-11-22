@@ -116,7 +116,7 @@ A second plugin here, `pethost-sandboxes`, is for a different job: Linux compute
 for AI agents, to run code. Each sandbox is a Firecracker microVM with its own kernel, made from
 a template in about 0.1 s, with Python, Node.js, Docker, Claude Code, Codex, OpenCode and a
 desktop with Chrome. It pauses with its memory and processes when idle and wakes at the next
-call, stops to object storage when idle longer, and forks. You pay per second while it runs.
+call, and stops to object storage when idle longer. You pay per second while it runs.
 It needs a workspace of [Agent Sandboxes](https://pethost.dev/sandboxes/), and the hosting
 plugin above does not install it: each plugin brings only its own MCP server.
 
@@ -131,7 +131,6 @@ plugin above does not install it: each plugin brings only its own MCP server.
 |---|---|
 | “Run this script in a sandbox.” | Makes a sandbox, writes the files, runs them and shows what they printed. |
 | “Open this page in Chrome and take a screenshot.” | Drives Chrome on the sandbox's desktop and looks at the screen. |
-| “Fork it and try both fixes.” | Copies the sandbox, memory and processes included, and works in each copy. |
 | “Let Codex refactor it in a sandbox.” | Prompts a coding agent inside the sandbox and reports its answer. |
 
 The skill is [`sandboxes/skills/pethost-sandboxes`](sandboxes/skills/pethost-sandboxes/SKILL.md),
