@@ -1,6 +1,6 @@
 ---
 name: pethost-sandboxes
-description: Linux sandboxes for AI agents (Pethost Agent Sandboxes, Firecracker microVMs) to run code and tests in isolation, give a coding agent its own computer, drive Chrome on a desktop and start ready from a template. Use whenever code should run somewhere other than the user's own computer. Not for hosting an app that stays online for people: that is the pethost skill.
+description: Linux sandboxes for AI agents (Pethost Agent Sandboxes, Firecracker microVMs) to run code and tests in isolation, give a coding agent its own computer, drive Chrome on a desktop or with Playwright and start ready from a template. Use whenever code should run somewhere other than the user's own computer. Not for hosting an app that stays online for people: that is the pethost skill.
 license: MIT
 compatibility: Needs the Pethost Agent Sandboxes MCP server (streamable HTTP, sign-in by OAuth) and a Pethost workspace of sandboxes (https://pethost.dev/sandboxes/).
 ---
@@ -8,10 +8,11 @@ compatibility: Needs the Pethost Agent Sandboxes MCP server (streamable HTTP, si
 # Pethost Agent Sandboxes
 
 A sandbox is a Linux computer of its own for the task at hand: a Firecracker microVM with its
-own kernel, made from a template in about 0.1 s. The template `base` has Ubuntu, Python,
-Node.js, Docker, Claude Code, Codex, OpenCode and a desktop with Chrome; you are root there
-(`sudo`), and nothing you do in it reaches the person's computer. You run sandboxes with the
-tools of the `pethost-sandboxes` MCP server; the person sees the same in Pethost's web panel.
+own kernel, made from a template in about 0.15 s. The template `base` has Ubuntu, Python,
+Node.js, Docker, Claude Code, Codex, OpenCode and a desktop with Chrome; commands run as `user`,
+with passwordless `sudo`, and nothing you do in it reaches the person's computer. You run
+sandboxes with the tools of the `pethost-sandboxes` MCP server; the person sees the same in
+Pethost's web panel.
 
 The tools (`GetWorkspace`, `CreateSandbox` and the rest) are tool calls you make yourself;
 where your client loads tools on demand, load them first. An answer is only ever what a call
@@ -92,10 +93,17 @@ never print it in the conversation or put it in a file.
   agent has no key; the person adds it as a secret in the panel (its value never passes
   through you), or OpenCode, which needs none, does the work.
 - **Chrome**: `ControlDesktop` with `actions` (`click`, `type_text`, `press_keys`, `scroll`,
-  `wait_ms`) answers with a screenshot you see. To let the person watch or take over,
-  `CreateLink` with `{"desktop":{}}`, a one-time link, or the `panel_url`.
+  `drag`, `wait_ms`; `mouse_down`, `mouse_up` and `hold_keys` for a button or keys held down)
+  answers with a screenshot you see: `screenshot_region` for a closer look at a part,
+  `skip_screenshot` for none. For Playwright or Puppeteer, `CreateLink` with `{"browser":{}}`
+  gives a WebSocket URL to the same Chrome (`chromium.connect_over_cdp(url)`): it opens the
+  browser and its sign-ins, so keep it in a variable like the token. Inside the sandbox it is
+  `http://localhost:9222`, and Claude Code, Codex and OpenCode there have it as their `browser`
+  MCP server. To let the person watch or take over, `CreateLink` with `{"desktop":{}}` (it
+  works until it expires, an hour unless `ttl_seconds` says otherwise), or the `panel_url`.
 - **Start ready next time**: `CreateTemplate` with `{"sandbox_id":"…","name":"my-app"}` saves its
-  disk; `CreateSandbox` with `{"template":"my-app"}` starts from it.
+  disk, Chrome's sign-ins among it: sign out first of what the template's users must not reach.
+  `CreateSandbox` with `{"template":"my-app"}` starts from it.
 
 ## What a sandbox gives back
 

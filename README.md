@@ -114,7 +114,7 @@ browser, and revoke it in the panel's Settings at any time.
 
 A second plugin here, `pethost-sandboxes`, is for a different job: Linux computers of their own
 for AI agents, to run code. Each sandbox is a Firecracker microVM with its own kernel, made from
-a template in about 0.1 s, with Python, Node.js, Docker, Claude Code, Codex, OpenCode and a
+a template in about 0.15 s, with Python, Node.js, Docker, Claude Code, Codex, OpenCode and a
 desktop with Chrome. It pauses with its memory and processes when idle and wakes at the next
 call, and stops to object storage when idle longer. You pay per second while it runs.
 It needs a workspace of [Agent Sandboxes](https://pethost.dev/sandboxes/), and the hosting
