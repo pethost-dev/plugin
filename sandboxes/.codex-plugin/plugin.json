@@ -1,6 +1,6 @@
 {
   "name": "pethost-sandboxes",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Sandboxes for AI agents: Firecracker microVMs that run code, coding agents and a browser. A skill that says when and how, and the Pethost Agent Sandboxes MCP server.",
   "author": { "name": "Pethost", "email": "support@pethost.dev", "url": "https://pethost.dev" },
   "homepage": "https://pethost.dev/sandboxes/",

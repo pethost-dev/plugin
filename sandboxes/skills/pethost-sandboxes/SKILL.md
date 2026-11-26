@@ -98,9 +98,13 @@ never print it in the conversation or put it in a file.
   `skip_screenshot` for none. For Playwright or Puppeteer, `CreateLink` with `{"browser":{}}`
   gives a WebSocket URL to the same Chrome (`chromium.connect_over_cdp(url)`): it opens the
   browser and its sign-ins, so keep it in a variable like the token. Inside the sandbox it is
-  `http://localhost:9222`, and Claude Code, Codex and OpenCode there have it as their `browser`
-  MCP server. To let the person watch or take over, `CreateLink` with `{"desktop":{}}` (it
-  works until it expires, an hour unless `ttl_seconds` says otherwise), or the `panel_url`.
+  `http://localhost:9222`, and Claude Code, Codex and OpenCode there drive it with
+  `playwright-cli`, whose skill they have. Code that drives the screen (PyAutoGUI) or the
+  browser (Playwright) and keeps its variables between runs: `RunCommand` of `pethost-code run
+  --session work --language python` (or `javascript`) with the code as `stdin`, whose `display()`
+  shows you an image (a PNG path in its JSON answer, for `ReadFile`). To let the person watch or
+  take over, `CreateLink` with `{"desktop":{}}` (it works until it expires, an hour unless
+  `ttl_seconds` says otherwise), or the `panel_url`.
 - **Start ready next time**: `CreateTemplate` with `{"sandbox_id":"…","name":"my-app"}` saves its
   disk, Chrome's sign-ins among it: sign out first of what the template's users must not reach.
   `CreateSandbox` with `{"template":"my-app"}` starts from it.
